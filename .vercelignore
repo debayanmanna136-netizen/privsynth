@@ -1,0 +1,60 @@
+# =============================================================================
+# PrivSynth - Vercel Deployment Exclusions (.vercelignore)
+# Minimizes bundle payload to stay within Serverless Function limits
+# =============================================================================
+
+# Version control & IDE
+.git/
+.gitignore
+.dockerignore
+.vercelignore
+.vscode/
+.idea/
+
+# Virtual environments & local dependencies
+.venv/
+venv/
+env/
+ENV/
+
+# Python cache and bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Research notebooks & data assets (not needed in runtime serverless API)
+notebooks/
+generate_notebook*.py
+data/
+
+# Generated results, uploads, and local storage artifacts
+backend/services/storage/*.csv
+backend/services/storage/*_meta.json
+backend/services/storage/*.tmp
+temp_*
+*.tmp
+scratch/
+*.log
+
+# Local environment secrets
+.env
+.env.*
+!.env.example
+
+# Test suite files (development only)
+test_*.py
+tests/
+requirements-dev.txt
+requirements-full.txt
+
+# Docker and Nginx VPS configurations
+Dockerfile
+docker-compose.yml
+nginx/
+

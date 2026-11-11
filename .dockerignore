@@ -1,0 +1,52 @@
+# =============================================================================
+# PrivSynth - Docker Build Exclusions
+# =============================================================================
+
+# Version control & IDE
+.git/
+.gitignore
+.dockerignore
+.vscode/
+.idea/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Python byte-code and caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Research notebooks & experimental generator scripts
+notebooks/
+generate_notebook*.py
+data/
+
+# Generated results, uploads, and local storage artifacts
+backend/services/storage/*.csv
+backend/services/storage/*_meta.json
+backend/services/storage/*.tmp
+temp_*
+*.tmp
+scratch/
+*.log
+
+# Local environment secrets & files
+.env
+.env.*
+!.env.example
+
+# Test suite files (only needed during development/testing)
+test_*.py
+tests/
+verify_frontend.py
+

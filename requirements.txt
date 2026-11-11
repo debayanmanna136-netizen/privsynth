@@ -1,0 +1,23 @@
+# =============================================================================
+# PrivSynth - Production Runtime Dependencies
+# Pinned to verified working environment versions
+# Lightweight serverless configuration (Zero PyTorch, Zero SDV)
+# Used by Vercel Serverless Function builder and base runtime
+# =============================================================================
+
+# Web Framework & API Server
+fastapi==0.143.3
+uvicorn[standard]==0.54.0
+python-multipart==0.0.32
+pydantic==2.14.1
+python-dotenv==1.2.4
+
+# Data Processing & Machine Learning
+pandas==2.3.3
+numpy==2.5.3
+scipy==1.18.1
+scikit-learn==1.9.1
+
+# Statistical Synthetic Data Generation (Lightweight Gaussian Copula)
+copulas==0.14.1
+rdt==1.22.0

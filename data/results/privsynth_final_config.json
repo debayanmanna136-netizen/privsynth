@@ -1,0 +1,14 @@
+{
+    "project_name": "PrivSynth",
+    "generator": "CTGAN",
+    "dataset": "UCI Adult",
+    "epochs": 25,
+    "batch_size": 500,
+    "embedding_dim": 256,
+    "random_seed": 42,
+    "generated_rows": 32561,
+    "source_training_dataset": "data/raw/adult.data",
+    "output_dataset_path": "data/synthetic/adult_privsynth_final.csv",
+    "selection_reason": "Selected as the project default based on highest normalized multi-objective score observed in Notebook 13. Acknowledged as empirical default, not a universally optimal configuration.",
+    "timestamp": "2026-10-05T15:14:36Z"
+}

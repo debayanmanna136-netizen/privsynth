@@ -1,0 +1,67 @@
+# =============================================================================
+# PrivSynth - Production Docker Compose Configuration
+# Single VPS architecture: Nginx Reverse Proxy + FastAPI Backend + Persistent Volume
+# =============================================================================
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: privsynth-backend:latest
+    container_name: privsynth-backend
+    restart: unless-stopped
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8000
+      - PRIVSYNTH_STORAGE_DIR=/app/storage
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-*}
+      - MAX_FILE_BYTES=${MAX_FILE_BYTES:-52428800}
+      - MAX_UPLOAD_ROWS=${MAX_UPLOAD_ROWS:-50000}
+      - RESULT_TTL_HOURS=${RESULT_TTL_HOURS:-24}
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      # Persistent named volume guaranteeing output datasets survive container restarts
+      - privsynth_storage:/app/storage
+    expose:
+      # Internal to Docker network only; not published directly to host
+      - "8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:8000/api/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 30s
+      retries: 3
+    networks:
+      - privsynth-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: privsynth-nginx
+    restart: unless-stopped
+    ports:
+      # Only Nginx public port is published to host
+      - "${PUBLIC_PORT:-80}:80"
+    volumes:
+      # Serve frontend static assets read-only
+      - ./frontend:/usr/share/nginx/html:ro
+      # Mount Nginx reverse proxy configuration read-only
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - privsynth-network
+
+volumes:
+  # Persistent storage volume for generated synthetic CSVs and metadata
+  privsynth_storage:
+    name: privsynth_storage
+
+networks:
+  privsynth-network:
+    name: privsynth-network
+    driver: bridge
+

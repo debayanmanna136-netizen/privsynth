@@ -1,0 +1,8 @@
+# =============================================================================
+# PrivSynth - Full Production Dependencies (Docker VPS & Deep Learning)
+# Includes PyTorch and SDV for unrestricted CTGAN generation
+# =============================================================================
+-r requirements.txt
+torch==2.14.0
+sdv==1.38.3
+

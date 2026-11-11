@@ -1,0 +1,16 @@
+# =============================================================================
+# PrivSynth - Development & Testing Dependencies
+# Extends production dependencies with test runners, tooling, and notebooks
+# =============================================================================
+
+-r requirements.txt
+
+# Testing & HTTP Test Client
+pytest==9.1.1
+httpx==0.28.1
+
+# Research Notebooks & Visualization
+jupyter==1.1.1
+matplotlib==3.11.2
+seaborn==0.13.2
+
